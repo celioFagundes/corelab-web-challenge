@@ -9,7 +9,15 @@
     gap: 1rem;
     width: 100%;
   }
+  .search_filter_box{
+    display: grid;
+    grid-template-columns: 80% 20%;
 
+    .filter_button{
+      background-color: transparent;
+      border: 0;
+    }
+  }
   @include tablet {
 
   }
