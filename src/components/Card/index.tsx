@@ -28,7 +28,7 @@ const Card = (props: ICard) => {
   return (
     <div className={styles.Card}>
         <h2>{props.title}</h2>
-        <p className={styles.price}>R$ {props.price}</p>
+        <p className={styles.price}>R$ {props.price.toLocaleString('pt-br')}</p>
       <div className={styles.content}>
         <CardInfo data_name='Marca' data_value={props.brand} />
         <CardInfo data_name='Ano' data_value={props.year} />
