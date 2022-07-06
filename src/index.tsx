@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import App from './app';
 import './index.module.scss';
-import VehiclesPage from './pages/Vehicles/Home';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <VehiclesPage />
+    <App />
   </React.StrictMode>
 );
 

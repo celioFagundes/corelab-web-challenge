@@ -7,7 +7,7 @@ import styles from './Vehicles.module.scss'
 import { IVehicle } from '../../../types/Vehicle'
 import { IoOptions } from 'react-icons/io5'
 
-const VehiclesPage = () => {
+const HomeVehicles = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([])
   const [search, setSearch] = useState<string>('')
 
@@ -86,4 +86,4 @@ const VehiclesPage = () => {
   )
 }
 
-export default VehiclesPage
+export default HomeVehicles
