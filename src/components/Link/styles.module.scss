@@ -1,0 +1,43 @@
+@import '../../styles/break-points.scss';
+
+.link_button{
+    position: relative;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    padding: 5px 32px;
+    height:60px;
+    width:100%;
+    background-color: #65DCC7;
+    border: 0;
+    border-radius: 100px;
+    text-decoration: none;
+    color: #000;
+    box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.2);
+    &:hover{
+        cursor: pointer;
+        
+    }
+    @include laptop{
+        max-width: 365px;
+        margin: 0 auto;
+    }
+    .icon{
+        position: absolute;
+        top:14px;
+        left:30px;
+        justify-self: flex-start;
+        font-size: 30px;
+        @include laptop{
+            display: none;
+        }
+    }
+    .link_button_text{
+        font-weight: bold;
+        font-size: 20px;
+        text-transform: uppercase;
+        @include laptop{
+            font-size: 30px;
+        }
+    }
+}
