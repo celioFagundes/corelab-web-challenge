@@ -3,41 +3,43 @@
 .link_button{
     position: relative;
     display: flex;
-    justify-content:center;
+    justify-content:flex-start;
     align-items: center;
-    padding: 5px 32px;
-    height:60px;
+    height:50px;
     width:100%;
-    background-color: #65DCC7;
+    background-color: #fff;
     border: 0;
     border-radius: 8px;
     text-decoration: none;
     color: #000;
     box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.2);
+    transition: all 180ms ease-in-out;
     &:hover{
         cursor: pointer;
+        background-color: #093A3E;
+        color:#fff;
         
     }
     @include laptop{
         max-width: 365px;
-        margin: 0 auto;
     }
     .icon{
-        position: absolute;
-        top:14px;
-        left:30px;
-        justify-self: flex-start;
-        font-size: 30px;
-        @include laptop{
-            display: none;
-        }
+        display: flex;
+        justify-self: center;
+        align-items: center;
+        height:100%;
+        padding:15px;
+        margin-right: 15px;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        background-color: #093A3E ;
+        color:#fff;
+        font-size: 18px;
     }
     .link_button_text{
         font-weight: bold;
-        font-size: 20px;
+        font-size: 18px;
         text-transform: uppercase;
-        @include laptop{
-            font-size: 30px;
-        }
+        
     }
 }
