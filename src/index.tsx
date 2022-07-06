@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.module.scss';
-import VehiclesPage from './pages/Vehicles';
+import VehiclesPage from './pages/Vehicles/Home';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
