@@ -36,8 +36,7 @@ const VehiclesPage = () => {
             <FilterIcon />
           </button>
         </div>
-
-        <Button text='Add new vehicle' onClick={() => {}} />
+        <Button text='Adicionar' onClick={() => {}} />
         <Card title='Sandero Stepway'>
           <p>Price: 22000</p>
           <p>Description: Carro usado por 2 anos...</p>
