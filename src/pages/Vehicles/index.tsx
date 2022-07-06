@@ -33,7 +33,7 @@ const VehiclesPage = () => {
             onChange={evt => handleInputSearch(evt.target.value)}
           />
           <button className={styles.filter_button}>
-            <IoOptions />
+            <IoOptions  size = {50} color = 'rgba(0,0,0,0.8)'/>
           </button>
         </div>
         <Button text='Adicionar' onClick={() => {}} />

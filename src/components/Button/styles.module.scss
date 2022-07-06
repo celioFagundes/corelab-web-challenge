@@ -17,8 +17,10 @@
     }
     .icon{
         position: absolute;
+        top:14px;
         left:30px;
         justify-self: flex-start;
+        font-size: 30px;
         @include laptop{
             display: none;
         }
