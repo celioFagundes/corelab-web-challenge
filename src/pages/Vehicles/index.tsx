@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { getVehicles } from '../../lib/api'
-import { Button, Card } from '../../components'
+import { Button } from '../../components'
+import { Card, CardInfo } from '../../components/Card'
 import { Search } from '../../components/Inputs'
 import styles from './Vehicles.module.scss'
 import { IVehicle } from '../../types/Vehicle'
-import { FilterIcon } from '../../components/Icons'
-
+import {IoOptions} from 'react-icons/io5'
 const VehiclesPage = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([])
   const [search, setSearch] = useState<string>('')
@@ -33,14 +33,15 @@ const VehiclesPage = () => {
             onChange={evt => handleInputSearch(evt.target.value)}
           />
           <button className={styles.filter_button}>
-            <FilterIcon />
+            <IoOptions />
           </button>
         </div>
         <Button text='Adicionar' onClick={() => {}} />
         <Card title='Sandero Stepway'>
-          <p>Price: 22000</p>
-          <p>Description: Carro usado por 2 anos...</p>
-          <p>Year: 2018</p>
+          <CardInfo info='Preço: 22000' />
+          <CardInfo info='Descrição: Carro usado por 2 anos...' />
+          <CardInfo info='Ano: 2018' />
+          <CardInfo info='Cor: Vermelho' />
         </Card>
       </main>
     </div>

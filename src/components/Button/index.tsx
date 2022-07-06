@@ -1,4 +1,4 @@
-import { AddIcon } from '../Icons/Add'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
 import styles from './styles.module.scss'
 
 interface IButton {
@@ -10,7 +10,7 @@ const Button = (props: IButton) => {
   return (
     <button className={styles.button} onClick={props.onClick}>
       <div className={styles.icon}>
-        <AddIcon />
+        <AiOutlinePlusCircle/>
       </div>
 
       <p className={styles.button_text}>{props.text}</p>

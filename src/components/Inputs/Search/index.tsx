@@ -1,5 +1,5 @@
 import { ChangeEventHandler } from 'react'
-import { SearchIcon } from '../../Icons'
+import { AiOutlineSearch } from 'react-icons/ai'
 import styles from './style.module.scss'
 interface ISearch {
   placeholder: string
@@ -11,7 +11,7 @@ const Search = (props: ISearch) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.search_icon}>
-        <SearchIcon />
+        <AiOutlineSearch/>
       </div>
       <input className={styles.input} onChange = {props.onChange} type='text' placeholder={props.placeholder} value={props.value} />
     </div>
