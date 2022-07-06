@@ -1,10 +1,21 @@
+import { AddIcon } from '../Icons/Add'
+import styles from './styles.module.scss'
+
 interface IButton {
-  onClick: () => void;
-  text: string;
+  onClick: () => void
+  text: string
 }
 
 const Button = (props: IButton) => {
-  return <button onClick={props.onClick}>{props.text}</button>;
-};
+  return (
+    <button className={styles.button} onClick={props.onClick}>
+      <div className={styles.icon}>
+        <AddIcon />
+      </div>
 
-export default Button;
+      <p className={styles.button_text}>{props.text}</p>
+    </button>
+  )
+}
+
+export default Button
