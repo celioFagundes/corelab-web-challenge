@@ -1,0 +1,62 @@
+@import '../../../styles/break-points.scss';
+
+.wrapper {
+  display: grid;
+  padding: 1rem 2rem;
+  background-color: #f5faf8;
+  min-height: 100vh;
+  .header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    .back {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid #587169;
+    }
+    h1 {
+      margin-left: 15px;
+      font-size: 1.8rem;
+      color: #587169;
+    }
+  }
+  .form {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(165, 171, 179, 0.16);
+
+    .input_wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 5px;
+      .label {
+        color: #587169;
+        font-weight: bold;
+      }
+      .input {
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: 2px solid #cad6d1;
+        font-family: Inter;
+      }
+      .error_message {
+        font-size: 12px;
+        color: #ef3054;
+      }
+    }
+    .button_wrapper {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: 100%;
+    }
+  }
+}
