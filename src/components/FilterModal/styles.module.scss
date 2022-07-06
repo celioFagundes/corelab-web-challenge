@@ -1,0 +1,71 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1000;
+  padding: 20px;
+
+  background-color: rgba(0, 0, 0, 0.4);
+  .main {
+    height: 100%;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    color: #fff;
+    z-index: 2222;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+
+      .close {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 4px;
+        border-radius: 8px;
+        border: 1px solid #587169;
+        background-color: transparent;
+      }
+      h1 {
+        font-size: 1.8rem;
+        color: #587169;
+      }
+    }
+    .input_wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 5px;
+        margin-bottom: 30px;
+        .label {
+          color: #587169;
+          font-weight: bold;
+        }
+        .input {
+            width:100%;
+          padding: 10px 20px;
+          border-radius: 8px;
+          border: 2px solid #cad6d1;
+          font-family: Inter;
+        }
+        
+      }
+      .price_inputs_wrapper{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .button_wrapper {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+      }
+  }
+}
