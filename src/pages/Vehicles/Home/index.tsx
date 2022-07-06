@@ -41,19 +41,19 @@ const HomeVehicles = () => {
         <LinkButton path='/vehicles/create' text='Adicionar'  />
         <h2>Favoritos</h2>
         <section className={styles.cards_wrapper}>
-          <Card title='Sandero Stepway'>
+          <Card title='Sandero Stepway' editUrl='/vehicles/edit/1'>
             <CardInfo info='Preço: 22000' />
             <CardInfo info='Descrição: Carro usado por 2 anos...' />
             <CardInfo info='Ano: 2018' />
             <CardInfo info='Cor: Vermelho' />
           </Card>
-          <Card title='Sandero Stepway'>
+          <Card title='Sandero Stepway' editUrl='/vehicles/edit/1'>
             <CardInfo info='Preço: 22000' />
             <CardInfo info='Descrição: Carro usado por 2 anos...' />
             <CardInfo info='Ano: 2018' />
             <CardInfo info='Cor: Vermelho' />
           </Card>
-          <Card title='Sandero Stepway'>
+          <Card title='Sandero Stepway' editUrl='/vehicles/edit/1'>
             <CardInfo info='Preço: 22000' />
             <CardInfo info='Descrição: Carro usado por 2 anos...' />
             <CardInfo info='Ano: 2018' />
@@ -63,19 +63,19 @@ const HomeVehicles = () => {
 
         <h2>Meus anúncios</h2>
         <section className={styles.cards_wrapper}>
-          <Card title='Sandero Stepway'>
+          <Card title='Sandero Stepway' editUrl='/vehicles/edit/1'>
             <CardInfo info='Preço: 22000' />
             <CardInfo info='Descrição: Carro usado por 2 anos...' />
             <CardInfo info='Ano: 2018' />
             <CardInfo info='Cor: Vermelho' />
           </Card>
-          <Card title='Sandero Stepway'>
+          <Card title='Sandero Stepway' editUrl='/vehicles/edit/1'>
             <CardInfo info='Preço: 22000' />
             <CardInfo info='Descrição: Carro usado por 2 anos...' />
             <CardInfo info='Ano: 2018' />
             <CardInfo info='Cor: Vermelho' />
           </Card>
-          <Card title='Sandero Stepway'>
+          <Card title='Sandero Stepway' editUrl='/vehicles/edit/1'>
             <CardInfo info='Preço: 22000' />
             <CardInfo info='Descrição: Carro usado por 2 anos...' />
             <CardInfo info='Ano: 2018' />

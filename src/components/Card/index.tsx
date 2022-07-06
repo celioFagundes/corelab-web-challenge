@@ -1,9 +1,11 @@
 import React, { ReactNode } from 'react'
 import styles from './Card.module.scss'
 import { AiOutlineHeart, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 interface ICard {
   title: string
   children: ReactNode
+  editUrl: string
 }
 interface ICardInfo {
   info: string
@@ -16,9 +18,9 @@ const Card = (props: ICard) => {
         <button className={styles.action}>
           <AiOutlineHeart />
         </button>
-        <a href='/' className={styles.action}>
+        <Link to={props.editUrl} className={styles.action}>
           <AiOutlineEdit />
-        </a>
+        </Link>
         <button className={styles.action}>
           <AiOutlineDelete />
         </button>
