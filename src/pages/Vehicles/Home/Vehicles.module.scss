@@ -2,12 +2,18 @@
 
 .Vehicles {
   display: grid;
-  padding: 1rem 2rem;
-
+  background-color: #f5faf8;
+  @include laptop {
+    padding: 1rem 2rem;
+  }
+  
   .main {
     display: grid;
     gap: 1rem;
     width: 100%;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 1rem 2rem;
   }
   .section_title {
     font-size: 18px;
@@ -25,11 +31,12 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
-    @include tablet {
-      grid-template-columns: 1fr 1fr;
-    }
+    
     @include laptop {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr ;
+    }
+    @include desktop {
+      grid-template-columns: 1fr 1fr 1fr ;
     }
   }
 }

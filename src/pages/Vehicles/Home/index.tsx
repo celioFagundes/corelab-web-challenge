@@ -38,50 +38,37 @@ const HomeVehicles = () => {
             <IoOptions size={50} color='rgba(0,0,0,0.8)' />
           </button>
         </div>
-        <LinkButton path='/vehicles/create' text='Adicionar'  />
+        <LinkButton path='/vehicles/create' text='Adicionar' />
         <h2>Favoritos</h2>
         <section className={styles.cards_wrapper}>
-          <Card title='Sandero Stepway' editUrl='/vehicles/edit/1'>
-            <CardInfo info='Preço: 22000' />
-            <CardInfo info='Descrição: Carro usado por 2 anos...' />
-            <CardInfo info='Ano: 2018' />
-            <CardInfo info='Cor: Vermelho' />
-          </Card>
-          <Card title='Sandero Stepway' editUrl='/vehicles/edit/1'>
-            <CardInfo info='Preço: 22000' />
-            <CardInfo info='Descrição: Carro usado por 2 anos...' />
-            <CardInfo info='Ano: 2018' />
-            <CardInfo info='Cor: Vermelho' />
-          </Card>
-          <Card title='Sandero Stepway' editUrl='/vehicles/edit/1'>
-            <CardInfo info='Preço: 22000' />
-            <CardInfo info='Descrição: Carro usado por 2 anos...' />
-            <CardInfo info='Ano: 2018' />
-            <CardInfo info='Cor: Vermelho' />
-          </Card>
+          <Card
+            title='Sandero Stepway'
+            brand='Renault'
+            price={35000}
+            year={2018}
+            color='Vermelho'
+            editUrl='/vehicles/edit/1'
+          />
+          <Card
+            title='Sandero Stepway'
+            brand='Renault'
+            price={35000}
+            year={2018}
+            color='Vermelho'
+            editUrl='/vehicles/edit/1'
+          />
+          <Card
+            title='Sandero Stepway'
+            brand='Renault'
+            price={35000}
+            year={2018}
+            color='Vermelho'
+            editUrl='/vehicles/edit/1'
+          />
         </section>
 
         <h2>Meus anúncios</h2>
-        <section className={styles.cards_wrapper}>
-          <Card title='Sandero Stepway' editUrl='/vehicles/edit/1'>
-            <CardInfo info='Preço: 22000' />
-            <CardInfo info='Descrição: Carro usado por 2 anos...' />
-            <CardInfo info='Ano: 2018' />
-            <CardInfo info='Cor: Vermelho' />
-          </Card>
-          <Card title='Sandero Stepway' editUrl='/vehicles/edit/1'>
-            <CardInfo info='Preço: 22000' />
-            <CardInfo info='Descrição: Carro usado por 2 anos...' />
-            <CardInfo info='Ano: 2018' />
-            <CardInfo info='Cor: Vermelho' />
-          </Card>
-          <Card title='Sandero Stepway' editUrl='/vehicles/edit/1'>
-            <CardInfo info='Preço: 22000' />
-            <CardInfo info='Descrição: Carro usado por 2 anos...' />
-            <CardInfo info='Ano: 2018' />
-            <CardInfo info='Cor: Vermelho' />
-          </Card>
-        </section>
+        <section className={styles.cards_wrapper}></section>
       </main>
     </div>
   )
