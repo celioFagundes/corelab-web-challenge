@@ -6,6 +6,7 @@ import { Search } from '../../../components/Inputs'
 import styles from './Vehicles.module.scss'
 import { IVehicle } from '../../../types/Vehicle'
 import { IoOptions } from 'react-icons/io5'
+import LinkButton from '../../../components/Link'
 
 const HomeVehicles = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([])
@@ -37,7 +38,7 @@ const HomeVehicles = () => {
             <IoOptions size={50} color='rgba(0,0,0,0.8)' />
           </button>
         </div>
-        <Button text='Adicionar' onClick={() => {}} />
+        <LinkButton path='/vehicles/create' text='Adicionar'  />
         <h2>Favoritos</h2>
         <section className={styles.cards_wrapper}>
           <Card title='Sandero Stepway'>
