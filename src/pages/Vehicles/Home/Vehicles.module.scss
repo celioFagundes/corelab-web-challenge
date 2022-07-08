@@ -2,7 +2,6 @@
 
 .Vehicles {
   display: grid;
-  background-color: #f5faf8;
   @include laptop {
     padding: 1rem 2rem;
   }
@@ -30,7 +29,7 @@
   .cards_wrapper {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 15px;
     
     @include laptop {
       grid-template-columns: 1fr 1fr ;
