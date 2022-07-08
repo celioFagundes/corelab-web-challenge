@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getVehicles } from '../../../lib/api'
+import { getVehicles, removeVehicles, toggleIsFavorite } from '../../../lib/api'
 
 import { Card } from '../../../components/Card'
 import { Search } from '../../../components/Inputs'
@@ -8,34 +8,47 @@ import { IVehicle } from '../../../types/Vehicle'
 import { IoOptions } from 'react-icons/io5'
 import LinkButton from '../../../components/Link'
 import { FilterModal } from '../../../components/FilterModal'
+import useSWR from 'swr'
 
 const HomeVehicles = () => {
-  const [vehicles, setVehicles] = useState<IVehicle[]>([])
-  const [search, setSearch] = useState<string>('')
+  const [queryParams, setQueryParams] = useState({
+    keyword: '',
+    color: '',
+    brand: '',
+    year: 0,
+    minValue: 0,
+    maxValue: 0,
+  })
+
+  const { data, error, mutate } = useSWR<IVehicle[]>(
+    `http://localhost:3333/vehicles/?keyword=${queryParams.keyword}&color=${queryParams.color}&brand=${queryParams.brand}&year=${queryParams.year}&minValue=${queryParams.minValue}&maxValue=${queryParams.maxValue}`,
+    getVehicles
+  )
   const [showModalFilter, setShowModalFilter] = useState(false)
-  useEffect(() => {
-    const fetchVehicles = async () => {
-      const payload = await getVehicles()
-      setVehicles(payload)
-    }
-    fetchVehicles()
-  }, [])
 
   const handleInputSearch = (value: string) => {
-    setSearch(value)
+    setQueryParams({ ...queryParams, keyword: value })
   }
 
   const toggleFilterModal = (state: boolean) => {
     setShowModalFilter(state)
   }
+  const handleIsFavorite = async (id: number) => {
+    await toggleIsFavorite(id)
+    mutate()
+  }
+  const handleRemove = async (id: number) => {
+    await removeVehicles(id)
+    mutate()
+  }
+
   return (
     <div className={styles.Vehicles}>
       <main className={styles.main}>
         <div className={styles.search_filter_box}>
           <Search
-            placeholder='Buscar'
-            value={search}
-            onChange={evt => handleInputSearch(evt.target.value)}
+            onSubmit={handleInputSearch}
+            currentKeyword = {queryParams.keyword}
           />
           <button className={styles.filter_button} onClick={() => toggleFilterModal(true)}>
             <IoOptions size={50} color='rgba(0,0,0,0.8)' />
@@ -43,15 +56,15 @@ const HomeVehicles = () => {
           <FilterModal isOpen={showModalFilter} closeFn={() => toggleFilterModal(false)} />
         </div>
         <LinkButton path='/vehicles/create' text='Adicionar' />
-        {vehicles && vehicles.length === 0 && <p>Nenhum veículo encontrado</p>}
-        {vehicles && vehicles.length > 0 && (
+        {data && data.length === 0 && <p>Nenhum veículo encontrado</p>}
+        {data && data.length > 0 && (
           <>
             <h2>Favoritos</h2>
-            {vehicles.filter(vehicle => vehicle.is_favorite).length === 0 && (
+            {data.filter(vehicle => vehicle.is_favorite).length === 0 && (
               <p>Nenhum veículo como favorito</p>
             )}
             <section className={styles.cards_wrapper}>
-              {vehicles.map(
+              {data.map(
                 vehicle =>
                   vehicle.is_favorite && (
                     <Card
@@ -65,16 +78,18 @@ const HomeVehicles = () => {
                       color={vehicle.color}
                       editUrl={`/vehicles/edit/${vehicle.id}`}
                       isFavorite={vehicle.is_favorite}
+                      toggleIsFavorite={() => handleIsFavorite(vehicle.id)}
+                      removeVehicle={() => handleRemove(vehicle.id)}
                     />
                   )
               )}
             </section>
             <h2>Meus anúncios</h2>
-            {vehicles.filter(vehicle => !vehicle.is_favorite).length === 0 && (
+            {data.filter(vehicle => !vehicle.is_favorite).length === 0 && (
               <p>Nenhum veículo encontrado</p>
             )}
             <section className={styles.cards_wrapper}>
-              {vehicles.map(
+              {data.map(
                 vehicle =>
                   !vehicle.is_favorite && (
                     <Card
@@ -88,6 +103,8 @@ const HomeVehicles = () => {
                       color={vehicle.color}
                       editUrl={`/vehicles/edit/${vehicle.id}`}
                       isFavorite={vehicle.is_favorite}
+                      toggleIsFavorite={() => handleIsFavorite(vehicle.id)}
+                      removeVehicle={() => handleRemove(vehicle.id)}
                     />
                   )
               )}
