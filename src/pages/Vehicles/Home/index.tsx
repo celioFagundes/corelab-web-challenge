@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getVehicles } from '../../../lib/api'
 
-import { Card} from '../../../components/Card'
+import { Card } from '../../../components/Card'
 import { Search } from '../../../components/Inputs'
 import styles from './Vehicles.module.scss'
 import { IVehicle } from '../../../types/Vehicle'
@@ -18,7 +18,6 @@ const HomeVehicles = () => {
       const payload = await getVehicles()
       setVehicles(payload)
     }
-
     fetchVehicles()
   }, [])
 
@@ -26,7 +25,7 @@ const HomeVehicles = () => {
     setSearch(value)
   }
 
-  const toggleFilterModal = (state: boolean) =>{
+  const toggleFilterModal = (state: boolean) => {
     setShowModalFilter(state)
   }
   return (
@@ -38,45 +37,63 @@ const HomeVehicles = () => {
             value={search}
             onChange={evt => handleInputSearch(evt.target.value)}
           />
-          <button className={styles.filter_button} onClick = {() => toggleFilterModal(true)}>
+          <button className={styles.filter_button} onClick={() => toggleFilterModal(true)}>
             <IoOptions size={50} color='rgba(0,0,0,0.8)' />
           </button>
-          <FilterModal
-            isOpen={showModalFilter}
-            closeFn={() => toggleFilterModal(false)}
-          />
+          <FilterModal isOpen={showModalFilter} closeFn={() => toggleFilterModal(false)} />
         </div>
         <LinkButton path='/vehicles/create' text='Adicionar' />
-        <h2>Favoritos</h2>
-        <section className={styles.cards_wrapper}>
-          <Card
-            title='Sandero Stepway'
-            brand='Renault'
-            price={35000}
-            year={2018}
-            color='Vermelho'
-            editUrl='/vehicles/edit/1'
-          />
-          <Card
-            title='Sandero Stepway'
-            brand='Renault'
-            price={35000}
-            year={2018}
-            color='Vermelho'
-            editUrl='/vehicles/edit/1'
-          />
-          <Card
-            title='Sandero Stepway'
-            brand='Renault'
-            price={35000}
-            year={2018}
-            color='Vermelho'
-            editUrl='/vehicles/edit/1'
-          />
-        </section>
-
-        <h2>Meus anúncios</h2>
-        <section className={styles.cards_wrapper}></section>
+        {vehicles && vehicles.length === 0 && <p>Nenhum veículo encontrado</p>}
+        {vehicles && vehicles.length > 0 && (
+          <>
+            <h2>Favoritos</h2>
+            {vehicles.filter(vehicle => vehicle.is_favorite).length === 0 && (
+              <p>Nenhum veículo como favorito</p>
+            )}
+            <section className={styles.cards_wrapper}>
+              {vehicles.map(
+                vehicle =>
+                  vehicle.is_favorite && (
+                    <Card
+                      key={vehicle.id}
+                      title={vehicle.name}
+                      description={vehicle.description}
+                      plate={vehicle.plate}
+                      brand={vehicle.brand}
+                      price={vehicle.price}
+                      year={vehicle.year}
+                      color={vehicle.color}
+                      editUrl={`/vehicles/edit/${vehicle.id}`}
+                      isFavorite={vehicle.is_favorite}
+                    />
+                  )
+              )}
+            </section>
+            <h2>Meus anúncios</h2>
+            {vehicles.filter(vehicle => !vehicle.is_favorite).length === 0 && (
+              <p>Nenhum veículo encontrado</p>
+            )}
+            <section className={styles.cards_wrapper}>
+              {vehicles.map(
+                vehicle =>
+                  !vehicle.is_favorite && (
+                    <Card
+                      key={vehicle.id}
+                      title={vehicle.name}
+                      description={vehicle.description}
+                      plate={vehicle.plate}
+                      brand={vehicle.brand}
+                      price={vehicle.price}
+                      year={vehicle.year}
+                      color={vehicle.color}
+                      editUrl={`/vehicles/edit/${vehicle.id}`}
+                      isFavorite={vehicle.is_favorite}
+                    />
+                  )
+              )}
+            </section>
+          </>
+        )}
       </main>
     </div>
   )
