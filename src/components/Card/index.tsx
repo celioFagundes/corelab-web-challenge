@@ -1,5 +1,5 @@
 import styles from './Card.module.scss'
-import { AiOutlineHeart, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
+import { AiOutlineHeart, AiOutlineEdit, AiOutlineDelete, AiFillHeart } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 
 interface ICard {
@@ -11,6 +11,7 @@ interface ICard {
   year: number
   color: string
   editUrl: string
+  isFavorite: boolean
 }
 interface ICardInfo {
   data_name: string
@@ -42,7 +43,8 @@ const Card = (props: ICard) => {
         <p className={styles.description}>{props.description}</p>
         <div className={styles.actions}>
           <button className={styles.action}>
-            <AiOutlineHeart />
+            
+            {props.isFavorite ? <AiFillHeart color= '#f03a47'/> : <AiOutlineHeart />}
           </button>
           <Link to={props.editUrl} className={styles.action}>
             <AiOutlineEdit />
