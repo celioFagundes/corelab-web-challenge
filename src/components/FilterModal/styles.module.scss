@@ -39,33 +39,33 @@
       }
     }
     .input_wrapper {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 5px;
-        margin-bottom: 30px;
-        .label {
-          color: #587169;
-          font-weight: bold;
-        }
-        .input {
-            width:100%;
-          padding: 10px 20px;
-          border-radius: 8px;
-          border: 2px solid #cad6d1;
-          font-family: Inter;
-        }
-        
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 5px;
+      margin-bottom: 30px;
+      .label {
+        color: #587169;
+        font-weight: bold;
       }
-      .price_inputs_wrapper{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-      }
-      .button_wrapper {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+      .input {
         width: 100%;
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: 2px solid #cad6d1;
+        color: #587169;
+        cursor: pointer;
       }
+    }
+    .price_inputs_wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .button_wrapper {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: 100%;
+    }
   }
 }
