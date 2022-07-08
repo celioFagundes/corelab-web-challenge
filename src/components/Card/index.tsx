@@ -1,6 +1,7 @@
 import styles from './Card.module.scss'
 import { AiOutlineHeart, AiOutlineEdit, AiOutlineDelete, AiFillHeart } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
+import { MouseEventHandler } from 'react'
 
 interface ICard {
   title: string
@@ -12,6 +13,8 @@ interface ICard {
   color: string
   editUrl: string
   isFavorite: boolean
+  toggleIsFavorite: MouseEventHandler<HTMLButtonElement>
+  removeVehicle: MouseEventHandler<HTMLButtonElement>
 }
 interface ICardInfo {
   data_name: string
@@ -42,14 +45,13 @@ const Card = (props: ICard) => {
       <div className={styles.bottom_wrapper}>
         <p className={styles.description}>{props.description}</p>
         <div className={styles.actions}>
-          <button className={styles.action}>
-            
-            {props.isFavorite ? <AiFillHeart color= '#f03a47'/> : <AiOutlineHeart />}
+          <button className={styles.action} onClick={props.toggleIsFavorite}>
+            {props.isFavorite ? <AiFillHeart color='#f03a47' /> : <AiOutlineHeart />}
           </button>
           <Link to={props.editUrl} className={styles.action}>
             <AiOutlineEdit />
           </Link>
-          <button className={styles.action}>
+          <button className={styles.action} onClick={props.removeVehicle}>
             <AiOutlineDelete />
           </button>
         </div>

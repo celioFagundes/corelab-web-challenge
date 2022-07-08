@@ -106,6 +106,10 @@
         margin: 2px 0px;
         font-size: 28px;
         color: #fff;
+        cursor: pointer;
+        &:hover{
+          color :#CC5A71;
+        }
       }
     }
   }
