@@ -5,7 +5,7 @@
   @include laptop {
     padding: 1rem 2rem;
   }
-  
+
   .main {
     display: grid;
     gap: 1rem;
@@ -18,25 +18,38 @@
     font-size: 18px;
   }
   .search_filter_box {
-    display: grid;
-    grid-template-columns: 80% 20%;
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     .filter_button {
+      position: relative;
       background-color: transparent;
       border: 0;
       cursor: pointer;
+
+      .filter_count {
+        position: absolute;
+        background-color: orange;
+        text-align: center;
+        padding:3px 6px;
+        border-radius: 50%;
+        top: 0;
+        right:0;
+        font-weight: bold;
+        color: #fff;
+      }
     }
   }
   .cards_wrapper {
     display: grid;
     grid-template-columns: 1fr;
     gap: 15px;
-    
+
     @include laptop {
-      grid-template-columns: 1fr 1fr ;
+      grid-template-columns: 1fr 1fr;
     }
     @include desktop {
-      grid-template-columns: 1fr 1fr 1fr ;
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
 }

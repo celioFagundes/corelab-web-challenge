@@ -5,6 +5,7 @@ import { Card } from '../../../components/Card'
 import { Search } from '../../../components/Inputs'
 import styles from './Vehicles.module.scss'
 import { IVehicle } from '../../../types/Vehicle'
+import { IFilterOptions } from '../../../types/Filter'
 import { IoOptions } from 'react-icons/io5'
 import LinkButton from '../../../components/Link'
 import { FilterModal } from '../../../components/FilterModal'
@@ -15,9 +16,9 @@ const HomeVehicles = () => {
     keyword: '',
     color: '',
     brand: '',
-    year: 0,
-    minValue: 0,
-    maxValue: 0,
+    year: '',
+    minValue: '',
+    maxValue: '',
   })
 
   const { data, error, mutate } = useSWR<IVehicle[]>(
@@ -33,6 +34,9 @@ const HomeVehicles = () => {
   const toggleFilterModal = (state: boolean) => {
     setShowModalFilter(state)
   }
+  const handleApplyFilter = (options: IFilterOptions) => {
+    setQueryParams({ ...queryParams, ...options })
+  }
   const handleIsFavorite = async (id: number) => {
     await toggleIsFavorite(id)
     mutate()
@@ -42,18 +46,36 @@ const HomeVehicles = () => {
     mutate()
   }
 
+  const filteringBy = () => {
+    let filterCount = 0
+    queryParams.color && filterCount++
+    queryParams.brand && filterCount++
+    queryParams.year && filterCount++
+    queryParams.minValue && filterCount++
+    queryParams.maxValue && filterCount++
+    return filterCount
+  }
   return (
     <div className={styles.Vehicles}>
       <main className={styles.main}>
         <div className={styles.search_filter_box}>
-          <Search
-            onSubmit={handleInputSearch}
-            currentKeyword = {queryParams.keyword}
-          />
+          <Search onSubmit={handleInputSearch} currentKeyword={queryParams.keyword} />
           <button className={styles.filter_button} onClick={() => toggleFilterModal(true)}>
             <IoOptions size={50} color='rgba(0,0,0,0.8)' />
+            <p className={styles.filter_count}>{filteringBy()}</p>
           </button>
-          <FilterModal isOpen={showModalFilter} closeFn={() => toggleFilterModal(false)} />
+          <FilterModal
+            applyFilterFn={handleApplyFilter}
+            isOpen={showModalFilter}
+            closeFn={() => toggleFilterModal(false)}
+          />
+        </div>
+        <div className={styles.search_filter_values}>
+          {queryParams.keyword !== '' && (
+            <p className={styles.results_text}>
+              Mostrando resultados de busca para "{queryParams.keyword}"
+            </p>
+          )}
         </div>
         <LinkButton path='/vehicles/create' text='Adicionar' />
         {data && data.length === 0 && <p>Nenhum veículo encontrado</p>}

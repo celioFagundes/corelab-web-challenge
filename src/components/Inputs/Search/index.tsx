@@ -35,15 +35,12 @@ const Search = (props: ISearch) => {
           placeholder='Digite o termo e pressione a tecla enter para pesquisar'
           value={inputValue}
         />
-      </div>
-      {props.currentKeyword !== '' && (
-        <div className={styles.results_wrapper}>
-          <p className={styles.results_text}>Mostrando resultados para "{props.currentKeyword}"</p>
+        {props.currentKeyword !== '' && (
           <button onClick={resetSearch} className={styles.results_reset}>
             <AiOutlineClose size={18} />
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }
