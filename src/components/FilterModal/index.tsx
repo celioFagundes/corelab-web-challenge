@@ -1,32 +1,18 @@
 import { useState } from 'react'
-import { BiX } from 'react-icons/bi'
-import { IFilterOptions } from '../../types/Filter'
-import Button from '../Buttons/Button'
-
 import styles from './styles.module.scss'
+import { brandOptions, colorOptions, yearOptions } from '../../utils/options'
+import { IFilterOptions } from '../../types/Filter'
+import { IoOptions } from 'react-icons/io5'
 
-const currentYear = new Date().getFullYear()
-const calcYears = (start: number, stop: number, step: number) =>
-  Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step)
-const yearOptions = calcYears(currentYear, currentYear - 50, -1)
-const colorOptions = ['Vermelho', 'Preto', 'Azul', 'Prata', 'Branco']
-const brandOptions = [
-  'Fiat',
-  'Citroen',
-  'Volkswagen',
-  'Chevrolet',
-  'Toyota',
-  'Nissan',
-  'Hyundai',
-  'Honda',
-  'Ford',
-  'Peugeot',
-  'Renault'
-]
+import { Button, CloseButton } from '../Buttons/'
+import { Select } from '../Selects/'
+import { Input } from '../Inputs'
 
 interface IFilter {
-  closeFn: () => void
   isOpen: boolean
+  filterCount: number
+  openFn: () => void
+  closeFn: () => void
   applyFilterFn: (options: IFilterOptions) => void
 }
 
@@ -56,87 +42,55 @@ const FilterModal = (props: IFilter) => {
   }
   return (
     <>
+      <button className={styles.filter_button} onClick={props.openFn}>
+        <IoOptions size={50} color='rgba(0,0,0,0.8)' />
+        <p className={styles.filter_count}>{props.filterCount}</p>
+      </button>
       {props.isOpen && (
         <div className={styles.wrapper}>
           <div className={styles.main}>
             <div className={styles.header}>
               <h1>Filtrar veículos</h1>
-              <button onClick={props.closeFn} className={styles.close}>
-                <BiX size={28} color=' #587169' />
-              </button>
+              <CloseButton onClick={props.closeFn} />
             </div>
-
-            <div className={styles.input_wrapper}>
-              <label className={styles.label}>Marca</label>
-              <select
-                name='brand'
-                className={styles.input}
-                value={filterValues.brand}
-                onChange={evt => handleFilterValues('brand', evt.target.value)}
-              >
-                <option value=''>Todas</option>
-                {brandOptions.map(brand => (
-                  <option value={brand} key={brand}>
-                    {brand}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className={styles.input_wrapper}>
-              <label className={styles.label}>Cor</label>
-              <select
-                name='color'
-                className={styles.input}
-                value={filterValues.color}
-                onChange={evt => handleFilterValues('color', evt.target.value)}
-              >
-                <option value=''>Todas</option>
-                {colorOptions.map(color => (
-                  <option value={color} key={color}>
-                    {color}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className={styles.input_wrapper}>
-              <label className={styles.label}>Ano</label>
-              <select
-                name='year'
-                className={styles.input}
-                value={filterValues.year}
-                onChange={evt => handleFilterValues('year', evt.target.value)}
-              >
-                <option value=''>Todos</option>
-                {yearOptions.map(years => (
-                  <option value={years} key={years}>
-                    {years}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <Select
+              label='Marca'
+              name='brand'
+              value={filterValues.brand}
+              options={brandOptions}
+              onChange={evt => handleFilterValues('brand', evt.target.value)}
+            />
+            <Select
+              label='Cor'
+              name='color'
+              value={filterValues.color}
+              options={colorOptions}
+              onChange={evt => handleFilterValues('color', evt.target.value)}
+            />
+            <Select
+              label='Ano'
+              name='year'
+              value={filterValues.year}
+              options={yearOptions}
+              onChange={evt => handleFilterValues('year', evt.target.value)}
+            />
             <div className={styles.price_inputs_wrapper}>
-              <div className={styles.input_wrapper}>
-                <label className={styles.label}>Preço minímo</label>
-                <input
-                  type='number'
-                  name='year'
-                  placeholder='Digite o preço minimo'
-                  className={styles.input}
-                  value={filterValues.minValue}
-                  onChange={evt => handleFilterValues('minValue', evt.target.value)}
-                />
-              </div>
-              <div className={styles.input_wrapper}>
-                <label className={styles.label}>Preço maximo</label>
-                <input
-                  type='number'
-                  name='year'
-                  placeholder='Digite o preço maximo'
-                  className={styles.input}
-                  value={filterValues.maxValue}
-                  onChange={evt => handleFilterValues('maxValue', evt.target.value)}
-                />
-              </div>
+              <Input
+                type='number'
+                label='Preço mínimo'
+                name='min-value'
+                placeholder='Digite o preço mínimo'
+                value={filterValues.minValue}
+                onChange={evt => handleFilterValues('minValue', evt.target.value)}
+              />
+              <Input
+                type='number'
+                label='Preço máximo'
+                name='max-value'
+                placeholder='Digite o preço máximo'
+                value={filterValues.maxValue}
+                onChange={evt => handleFilterValues('maxValue', evt.target.value)}
+              />
             </div>
             <div className={styles.button_wrapper}>
               <Button text='Limpar filtros' onClick={resetFilter} />

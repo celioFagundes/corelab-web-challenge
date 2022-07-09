@@ -3,14 +3,14 @@
 .wrapper {
   display: grid;
   padding: 1rem 2rem;
-  background-color: #f5faf8;
   min-height: 100vh;
+  background-color: #f5faf8;
+
   .header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 10px;
-
     .back {
       display: flex;
       justify-content: center;
@@ -34,25 +34,6 @@
     background-color: #fff;
     box-shadow: 0px 4px 8px rgba(165, 171, 179, 0.16);
 
-    .input_wrapper {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 5px;
-      .label {
-        color: #587169;
-        font-weight: bold;
-      }
-      .input {
-        padding: 10px 20px;
-        border-radius: 8px;
-        border: 2px solid #cad6d1;
-
-      }
-      .error_message {
-        font-size: 12px;
-        color: #ef3054;
-      }
-    }
     .button_wrapper {
       display: flex;
       justify-content: flex-end;

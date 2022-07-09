@@ -1,7 +1,7 @@
-import styles from './Card.module.scss'
-import { AiOutlineHeart, AiOutlineEdit, AiOutlineDelete, AiFillHeart } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
+import styles from './Card.module.scss'
 import { MouseEventHandler } from 'react'
+import { AiOutlineHeart, AiOutlineEdit, AiOutlineDelete, AiFillHeart } from 'react-icons/ai'
 
 interface ICard {
   title: string

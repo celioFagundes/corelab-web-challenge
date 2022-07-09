@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { AiOutlineClose, AiOutlineSearch } from 'react-icons/ai'
 import styles from './style.module.scss'
+import { AiOutlineClose, AiOutlineSearch } from 'react-icons/ai'
+
 interface ISearch {
   onSubmit: (slug: string) => void
   currentKeyword: string
@@ -11,7 +12,7 @@ const Search = (props: ISearch) => {
 
   const handleKeyDown = (keyboardEvent: React.KeyboardEvent<HTMLInputElement>) => {
     if (keyboardEvent.code === 'Enter') {
-      props.onSubmit(inputValue)
+      props.onSubmit(inputValue.trim())
     }
   }
   const handleInputChange = (text: string) => {

@@ -1,25 +1,18 @@
 import { useFormik } from 'formik'
-import { ButtonSubmit } from '../../../components/Buttons'
 import styles from './styles.module.scss'
-import * as Yup from 'yup'
-import { Link, Navigate, Router, useNavigate } from 'react-router-dom'
-import { BiArrowBack } from 'react-icons/bi'
-import { createVehicle } from '../../../lib/api'
+import { colorOptions, brandOptions } from '../../../utils/options'
 import { IVehicle } from '../../../types/Vehicle'
-const colorOptions = ['Vermelho', 'Preto', 'Azul', 'Prata', 'Branco']
-const brandOptions = [
-  'Fiat',
-  'Citroen',
-  'Volkswagen',
-  'Chevrolet',
-  'Toyota',
-  'Nissan',
-  'Hyundai',
-  'Honda',
-  'Ford',
-  'Peugeot',
-  'Renault',
-]
+
+import { BiArrowBack } from 'react-icons/bi'
+
+import { createVehicle } from '../../../lib/api'
+import { Link, useNavigate } from 'react-router-dom'
+import * as Yup from 'yup'
+
+import { ButtonSubmit } from '../../../components/Buttons'
+import { Input } from '../../../components/Inputs'
+import { Select } from '../../../components/Selects'
+
 const VehicleSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, 'Por favor, informe um nome com pelo menos 3 caracteres')
@@ -75,109 +68,73 @@ const CreateVehicle = () => {
         <h1>Criar novo veículo</h1>
       </div>
       <form className={styles.form} onSubmit={form.handleSubmit}>
-        <div className={styles.input_wrapper}>
-          <label className={styles.label}>Nome</label>
-          <input
-            name='name'
-            placeholder='Digite o nome do veículo'
-            value={form.values.name}
-            onChange={form.handleChange}
-            onBlur={form.handleBlur}
-            className={styles.input}
-          />
-          <p className={styles.error_message}>{form.errors.name}</p>
-        </div>
-        <div className={styles.input_wrapper}>
-          <label className={styles.label}>Descrição</label>
-          <input
-            name='description'
-            placeholder='Digite  a descrição do veículo'
-            value={form.values.description}
-            onChange={form.handleChange}
-            onBlur={form.handleBlur}
-            className={styles.input}
-          />
-          <p className={styles.error_message}>{form.errors.description}</p>
-        </div>
-
-        <div className={styles.input_wrapper}>
-          <label className={styles.label}>Marca</label>
-          <select
-            name='brand'
-            value={form.values.brand}
-            onChange={form.handleChange}
-            onBlur={form.handleBlur}
-            className={styles.input}
-          >
-            <option hidden value=''>
-              Selecione a cor
-            </option>
-            {brandOptions.map(brand => (
-              <option value={brand} key={brand}>
-                {brand}
-              </option>
-            ))}
-          </select>
-          <p className={styles.error_message}>{form.errors.brand}</p>
-        </div>
-        <div className={styles.input_wrapper}>
-          <label className={styles.label}>Cor</label>
-          <select
-            name='color'
-            value={form.values.color}
-            onChange={form.handleChange}
-            onBlur={form.handleBlur}
-            className={styles.input}
-          >
-            <option hidden value=''>
-              Selecione a cor
-            </option>
-            {colorOptions.map(color => (
-              <option value={color} key={color}>
-                {color}
-              </option>
-            ))}
-          </select>
-          <p className={styles.error_message}>{form.errors.color}</p>
-        </div>
-        <div className={styles.input_wrapper}>
-          <label className={styles.label}>Ano</label>
-          <input
-            type='number'
-            name='year'
-            placeholder='Digite o ano do veículo'
-            value={form.values.year}
-            onChange={form.handleChange}
-            onBlur={form.handleBlur}
-            className={styles.input}
-          />
-          <p className={styles.error_message}>{form.errors.year}</p>
-        </div>
-        <div className={styles.input_wrapper}>
-          <label className={styles.label}>Preço</label>
-          <input
-            type='number'
-            name='price'
-            placeholder='Digite o preço do veículo'
-            value={form.values.price}
-            onChange={form.handleChange}
-            onBlur={form.handleBlur}
-            className={styles.input}
-          />
-          <p className={styles.error_message}>{form.errors.price}</p>
-        </div>
-        <div className={styles.input_wrapper}>
-          <label className={styles.label}>Placa</label>
-          <input
-            name='plate'
-            placeholder='Ex. de placa válida: AAA1A33'
-            value={form.values.plate}
-            onChange={form.handleChange}
-            onBlur={form.handleBlur}
-            className={styles.input}
-          />
-          <p className={styles.error_message}>{form.errors.plate}</p>
-        </div>
+        <Input
+          label='Name'
+          name='name'
+          placeholder='Digite o nome do veículo'
+          value={form.values.name}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          erroMessage={form.errors.name}
+        />
+        <Input
+          label='Descrição'
+          name='description'
+          placeholder='Digite  a descrição do veículo'
+          value={form.values.description}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          erroMessage={form.errors.description}
+        />
+        <Select
+          label='Marca'
+          name='brand'
+          value={form.values.brand}
+          options={brandOptions}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          errorMessage={form.errors.brand}
+          noAllOption
+        />
+        <Select
+          label='Cor'
+          name='color'
+          value={form.values.color}
+          options={colorOptions}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          errorMessage={form.errors.color}
+          noAllOption
+        />
+        <Input
+          type='number'
+          label='Ano'
+          name='year'
+          placeholder='Digite  o ano do veículo'
+          value={form.values.year}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          erroMessage={form.errors.year}
+        />
+        <Input
+          type='number'
+          label='Preço'
+          name='price'
+          placeholder='Digite  o preço do veículo'
+          value={form.values.price}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          erroMessage={form.errors.price}
+        />
+        <Input
+          label='Placa'
+          name='plate'
+          placeholder='Ex. de placa válida: AAA1A33'
+          value={form.values.plate}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          erroMessage={form.errors.plate}
+        />
         <div className={styles.button_wrapper}>
           <ButtonSubmit text='Salvar' />
         </div>

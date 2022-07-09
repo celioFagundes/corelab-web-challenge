@@ -1,4 +1,4 @@
-@import '../../styles/break-points.scss';
+@import '../../../styles/break-points.scss';
 
 .link_button {
   position: relative;
@@ -7,16 +7,16 @@
   align-items: center;
   height: 50px;
   width: 100%;
-  background-color: #fff;
-  border-radius: 8px;
-  text-decoration: none;
-  color: rgba(0, 0, 0, 0.8);
   border: 1px solid #cad6d1;
+  border-radius: 8px;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.8);
+  text-decoration: none;
   transition: all 180ms ease-in-out;
   &:hover {
-    cursor: pointer;
     background-color: #28232e;
     color: #fff;
+    cursor: pointer;
   }
   @include laptop {
     max-width: 365px;

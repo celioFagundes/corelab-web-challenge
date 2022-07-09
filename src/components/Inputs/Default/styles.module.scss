@@ -1,0 +1,19 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    .label {
+      color: #587169;
+      font-weight: bold;
+    }
+    .input {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 2px solid #cad6d1;
+
+    }
+    .error_message {
+      font-size: 12px;
+      color: #ef3054;
+    }
+  }

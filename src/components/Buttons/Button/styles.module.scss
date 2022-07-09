@@ -1,16 +1,16 @@
 @import '../../../styles/break-points.scss';
 
 .button{
-    position: relative;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px 32px;
   height: 45px;
   width: fit-content;
-  background-color: #fff;
+  padding: 0px 32px;
   border: 2px solid #65dcc7;
   border-radius: 8px;
+  background-color: #fff;
   box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.2);
   transition: all 200ms ease-in-out;
   cursor: pointer;

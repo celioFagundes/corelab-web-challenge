@@ -1,11 +1,11 @@
 @import '../../../styles/break-points.scss';
 
-.Vehicles {
+.wrapper {
   display: grid;
+  gap: 10px;
   @include laptop {
     padding: 1rem 2rem;
   }
-
   .main {
     display: grid;
     gap: 1rem;
@@ -15,30 +15,12 @@
     padding: 1rem 2rem;
   }
   .section_title {
-    font-size: 18px;
+    font-size: 1rem;
   }
   .search_filter_box {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .filter_button {
-      position: relative;
-      background-color: transparent;
-      border: 0;
-      cursor: pointer;
-
-      .filter_count {
-        position: absolute;
-        background-color: orange;
-        text-align: center;
-        padding:3px 6px;
-        border-radius: 50%;
-        top: 0;
-        right:0;
-        font-weight: bold;
-        color: #fff;
-      }
-    }
   }
   .cards_wrapper {
     display: grid;
