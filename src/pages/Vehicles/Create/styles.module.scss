@@ -9,6 +9,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin-bottom: 10px;
 
     .back {
       display: flex;
@@ -45,7 +46,7 @@
         padding: 10px 20px;
         border-radius: 8px;
         border: 2px solid #cad6d1;
-        font-family: Inter;
+
       }
       .error_message {
         font-size: 12px;
