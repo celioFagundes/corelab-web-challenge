@@ -21,6 +21,7 @@ const brandOptions = [
   'Honda',
   'Ford',
   'Peugeot',
+  'Renault'
 ]
 
 interface IFilter {
