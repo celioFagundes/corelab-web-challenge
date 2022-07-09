@@ -1,3 +1,5 @@
+@import '../../styles/break-points.scss';
+
 .filter_button {
   position: relative;
   background-color: transparent;
@@ -46,8 +48,13 @@
     }
     .price_inputs_wrapper {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      grid-template-columns: 1fr;
+      gap: 0px;
+      margin: 10px 0;
+      @include laptop {
+        gap: 10px;
+        grid-template-columns: 1fr 1fr;
+      }
     }
     .button_wrapper {
       display: grid;

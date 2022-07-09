@@ -21,13 +21,15 @@
     }
     h1 {
       margin-left: 15px;
-      font-size: 1.8rem;
+      font-size: 1.2rem;
       color: #587169;
+      @include tablet{
+        font-size: 1.6rem;
+      }
     }
   }
   .form {
     display: grid;
-    gap: 1rem;
     width: 100%;
     border-radius: 8px;
     padding: 1rem;
@@ -36,9 +38,12 @@
 
     .button_wrapper {
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
       width: 100%;
+      @include laptop{
+        justify-content: flex-end;
+      }
     }
   }
 }
