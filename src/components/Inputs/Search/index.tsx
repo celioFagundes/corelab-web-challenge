@@ -1,18 +1,22 @@
-import { useState } from 'react'
-import styles from './style.module.scss'
+import React, { useState } from 'react'
 import { AiOutlineClose, AiOutlineSearch } from 'react-icons/ai'
+
+import styles from './style.module.scss'
 
 interface ISearch {
   onSubmit: (slug: string) => void
   currentKeyword: string
 }
 
-const Search = (props: ISearch) => {
+function Search(props: ISearch) {
+  const { currentKeyword, onSubmit } = props
   const [inputValue, setInputValue] = useState('')
 
-  const handleKeyDown = (keyboardEvent: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (
+    keyboardEvent: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
     if (keyboardEvent.code === 'Enter') {
-      props.onSubmit(inputValue.trim())
+      onSubmit(inputValue.trim())
     }
   }
   const handleInputChange = (text: string) => {
@@ -20,7 +24,7 @@ const Search = (props: ISearch) => {
   }
   const resetSearch = () => {
     setInputValue('')
-    props.onSubmit('')
+    onSubmit('')
   }
   return (
     <div className={styles.wrapper}>
@@ -32,12 +36,16 @@ const Search = (props: ISearch) => {
           className={styles.input}
           onKeyDown={handleKeyDown}
           onChange={evt => handleInputChange(evt.target.value)}
-          type='text'
-          placeholder='Digite o termo e pressione a tecla enter para pesquisar'
+          type="text"
+          placeholder="Digite o termo e pressione a tecla enter para pesquisar"
           value={inputValue}
         />
-        {props.currentKeyword !== '' && (
-          <button onClick={resetSearch} className={styles.results_reset}>
+        {currentKeyword !== '' && (
+          <button
+            type="button"
+            onClick={resetSearch}
+            className={styles.results_reset}
+          >
             <AiOutlineClose size={18} />
           </button>
         )}

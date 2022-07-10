@@ -1,31 +1,41 @@
+import React, { ChangeEventHandler } from 'react'
 import styles from './styles.module.scss'
-import { ChangeEventHandler } from 'react'
 
 interface IInput {
-  type?: string
+  type?: string | 'text'
   label: string
   name: string
   placeholder: string
   value: string | number
   onChange: ChangeEventHandler<HTMLInputElement>
   onBlur?: ChangeEventHandler<HTMLInputElement>
-  erroMessage?: string
+  errorMessage?: string
 }
 
-const Input = (props: IInput) => {
+function Input(props: IInput) {
+  const {
+    type,
+    name,
+    label,
+    value,
+    placeholder,
+    onChange,
+    onBlur,
+    errorMessage,
+  } = props
   return (
     <div className={styles.wrapper}>
-      <label className={styles.label}>{props.label}</label>
+      <p className={styles.label}>{label}</p>
       <input
-        type={props.type ? props.type : 'text'}
-        name={props.name}
-        placeholder={props.placeholder}
-        value={props.value}
-        onChange={props.onChange}
-        onBlur={props.onBlur}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
         className={styles.input}
       />
-      <p className={styles.error_message}>{props.erroMessage}</p>
+      <p className={styles.error_message}>{errorMessage}</p>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from 'react'
+import React, { ChangeEventHandler } from 'react'
 import styles from './styles.module.scss'
 
 interface ISelectProps {
@@ -12,30 +12,40 @@ interface ISelectProps {
   noAllOption?: boolean
 }
 
-const Select = (props: ISelectProps) => {
+function Select(props: ISelectProps) {
+  const {
+    label,
+    name,
+    value,
+    options,
+    onChange,
+    onBlur,
+    errorMessage,
+    noAllOption,
+  } = props
   return (
     <div className={styles.wrapper}>
-      <label className={styles.label}>{props.label}</label>
+      <p className={styles.label}>{label}</p>
       <select
-        name={props.name}
+        name={name}
         className={styles.select}
-        value={props.value}
-        onChange={props.onChange}
-        onBlur={props.onBlur}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
       >
-        {props.noAllOption && (
-          <option hidden value=''>
+        {noAllOption && (
+          <option hidden value="">
             Selecione uma opção
           </option>
         )}
-        {!props.noAllOption && <option value=''>Todas</option>}
-        {props.options.map(opt => (
+        {!noAllOption && <option value="">Todas</option>}
+        {options.map(opt => (
           <option value={opt} key={opt}>
             {opt}
           </option>
         ))}
       </select>
-      {props.errorMessage && <p className={styles.error_message}>{props.errorMessage}</p>}
+      {errorMessage && <p className={styles.error_message}>{errorMessage}</p>}
     </div>
   )
 }

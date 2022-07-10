@@ -24,9 +24,9 @@ const postTrigger = async (path: string): Promise<any> => {
 export const GetVehicles = (params: IGetParams) => {
   const { data, error, mutate } = useSWR<IVehicle[]>(
     endpoint(
-      `/vehicles/?keyword=${params.keyword}&color=${params.color}&brand=${params.brand}&year=${params.year}&minValue=${params.minValue}&maxValue=${params.maxValue}`
+      `/vehicles/?keyword=${params.keyword}&color=${params.color}&brand=${params.brand}&year=${params.year}&minValue=${params.minValue}&maxValue=${params.maxValue}`,
     ),
-    get
+    get,
   )
   return {
     vehicles: data,

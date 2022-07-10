@@ -1,15 +1,17 @@
+import React from 'react'
 import styles from './styles.module.scss'
 
 interface IButton {
   text: string
 }
 
-const ButtonSubmit = (props: IButton) => {
+function ButtonSubmit(props: IButton) {
+  const { text } = props
   return (
-    <button className={styles.button} type ='submit'>
-      <p className={styles.button_text}>{props.text}</p>
+    <button type="submit" className={styles.button}>
+      <p className={styles.button_text}>{text}</p>
     </button>
   )
 }
 
-export { ButtonSubmit}
+export { ButtonSubmit }

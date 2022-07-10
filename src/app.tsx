@@ -1,17 +1,18 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import CreateVehicle from './pages/Vehicles/Create'
 import EditVehicle from './pages/Vehicles/Edit'
 import HomeVehicles from './pages/Vehicles/Home'
 
-const App = () => {
+function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path='/' element={<HomeVehicles />} />
-        <Route path='/vehicles/create' element={<CreateVehicle />} />
-        <Route path='/vehicles/edit/:id' element={<EditVehicle />} />
+        <Route path="/" element={<HomeVehicles />} />
+        <Route path="/vehicles/create" element={<CreateVehicle />} />
+        <Route path="/vehicles/edit/:id" element={<EditVehicle />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   )
 }
 export default App

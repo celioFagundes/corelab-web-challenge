@@ -1,3 +1,4 @@
+import React from 'react'
 import styles from './styles.module.scss'
 
 interface IButton {
@@ -5,12 +6,12 @@ interface IButton {
   text: string
 }
 
-const Button = (props: IButton) => {
+function Button(props: IButton) {
+  const { text, onClick } = props
   return (
-    <button className={styles.button} onClick={props.onClick}>
-      <p className={styles.button_text}>{props.text}</p>
+    <button type="button" className={styles.button} onClick={onClick}>
+      <p className={styles.button_text}>{text}</p>
     </button>
   )
 }
-
 export { Button }

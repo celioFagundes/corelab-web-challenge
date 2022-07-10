@@ -1,13 +1,16 @@
-import styles from './styles.module.scss'
+import React from 'react'
 import { BiX } from 'react-icons/bi'
+import styles from './styles.module.scss'
+
 interface IButton {
   onClick: () => void
 }
 
-const CloseButton = (props: IButton) => {
+function CloseButton(props: IButton) {
+  const { onClick } = props
   return (
-    <button onClick={props.onClick} className={styles.close}>
-      <BiX size={28} color=' #587169' />
+    <button type="button" onClick={onClick} className={styles.close}>
+      <BiX size={28} color=" #587169" />
     </button>
   )
 }

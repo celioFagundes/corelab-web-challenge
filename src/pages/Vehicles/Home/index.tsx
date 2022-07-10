@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { GetVehicles,  removeVehicles, toggleIsFavorite } from '../../../lib/api'
+import { GetVehicles, removeVehicles, toggleIsFavorite } from '../../../lib/api'
 import styles from './styles.module.scss'
 import { IFilterOptions } from '../../../types/Filter'
 
@@ -9,8 +9,9 @@ import { Search } from '../../../components/Inputs'
 import { LinkButton } from '../../../components/Buttons'
 import { FilterModal } from '../../../components/FilterModal'
 
-const HomeVehicles = () => {
+function HomeVehicles() {
   const [showModalFilter, setShowModalFilter] = useState(false)
+  const [filterCount, setFilterCount] = useState(0)
   const [queryParams, setQueryParams] = useState({
     keyword: '',
     color: '',
@@ -40,22 +41,29 @@ const HomeVehicles = () => {
     update()
   }
 
-  const countFiltersApplied = () => {
-    let filterCount = 0
-    queryParams.color && filterCount++
-    queryParams.brand && filterCount++
-    queryParams.year && filterCount++
-    queryParams.minValue && filterCount++
-    queryParams.maxValue && filterCount++
-    return filterCount
-  }
+  useEffect(() => {
+    const countFiltersApplied = () => {
+      let sumfilterCount = 0
+      Object.entries(queryParams).forEach(([key, value]) => {
+        if (key !== 'keyword' && value !== '') {
+          sumfilterCount += 1
+        }
+      })
+      setFilterCount(sumfilterCount)
+    }
+
+    countFiltersApplied()
+  }, [queryParams])
   return (
     <div className={styles.wrapper}>
       <main className={styles.main}>
         <div className={styles.search_filter_box}>
-          <Search onSubmit={handleInputSearch} currentKeyword={queryParams.keyword} />
+          <Search
+            onSubmit={handleInputSearch}
+            currentKeyword={queryParams.keyword}
+          />
           <FilterModal
-            filterCount={countFiltersApplied()}
+            filterCount={filterCount}
             applyFilterFn={handleApplyFilter}
             isOpen={showModalFilter}
             openFn={() => toggleFilterModal(true)}
@@ -63,9 +71,9 @@ const HomeVehicles = () => {
           />
         </div>
         {queryParams.keyword !== '' && (
-          <p>Mostrando resultados de busca para "{queryParams.keyword}"</p>
+          <p>Mostrando resultados de busca para {`"${queryParams.keyword}"`}</p>
         )}
-        <LinkButton path='/vehicles/create' text='Adicionar' />
+        <LinkButton path="/vehicles/create" text="Adicionar" />
         {vehicles && vehicles.length === 0 && <p>Nenhum veículo encontrado</p>}
         {vehicles && vehicles.length > 0 && (
           <>
@@ -91,7 +99,7 @@ const HomeVehicles = () => {
                         toggleIsFavorite={() => handleIsFavorite(vehicle.id)}
                         removeVehicle={() => handleRemove(vehicle.id)}
                       />
-                    )
+                    ),
                 )}
               </section>
             )}
@@ -117,7 +125,7 @@ const HomeVehicles = () => {
                         toggleIsFavorite={() => handleIsFavorite(vehicle.id)}
                         removeVehicle={() => handleRemove(vehicle.id)}
                       />
-                    )
+                    ),
                 )}
               </section>
             )}

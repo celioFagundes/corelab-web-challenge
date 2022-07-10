@@ -16,4 +16,4 @@ const currentYear = new Date().getFullYear()
 const calcYears = (start: number, stop: number, step: number) =>
   Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step)
 const yearOptions = calcYears(currentYear, currentYear - 50, -1)
-export { colorOptions, brandOptions , yearOptions}
+export { colorOptions, brandOptions, yearOptions }
