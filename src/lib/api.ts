@@ -19,7 +19,7 @@ const remove = async (path: string): Promise<any> => {
   return axios.delete(endpoint(path))
 }
 const postTrigger = async (path: string): Promise<any> => {
-  return axios.post(endpoint(path), null, { method: 'POST' })
+  return axios.post(endpoint(path))
 }
 export const GetVehicles = (params: IGetParams) => {
   const { data, error, mutate } = useSWR<IVehicle[]>(
