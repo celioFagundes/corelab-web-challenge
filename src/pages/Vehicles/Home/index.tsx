@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import useSWR from 'swr'
-import { getVehicles, removeVehicles, toggleIsFavorite } from '../../../lib/api'
+
+import { GetVehicles,  removeVehicles, toggleIsFavorite } from '../../../lib/api'
 import styles from './styles.module.scss'
-import { IVehicle } from '../../../types/Vehicle'
 import { IFilterOptions } from '../../../types/Filter'
 
 import { Card } from '../../../components/Card'
@@ -21,10 +20,7 @@ const HomeVehicles = () => {
     maxValue: '',
   })
 
-  const { data, error, mutate } = useSWR<IVehicle[]>(
-    `http://localhost:3333/vehicles/?keyword=${queryParams.keyword}&color=${queryParams.color}&brand=${queryParams.brand}&year=${queryParams.year}&minValue=${queryParams.minValue}&maxValue=${queryParams.maxValue}`,
-    getVehicles
-  )
+  const { vehicles, update } = GetVehicles(queryParams)
 
   const toggleFilterModal = (state: boolean) => {
     setShowModalFilter(state)
@@ -37,11 +33,11 @@ const HomeVehicles = () => {
   }
   const handleIsFavorite = async (id: number) => {
     await toggleIsFavorite(id)
-    mutate()
+    update()
   }
   const handleRemove = async (id: number) => {
     await removeVehicles(id)
-    mutate()
+    update()
   }
 
   const countFiltersApplied = () => {
@@ -70,15 +66,15 @@ const HomeVehicles = () => {
           <p>Mostrando resultados de busca para "{queryParams.keyword}"</p>
         )}
         <LinkButton path='/vehicles/create' text='Adicionar' />
-        {data && data.length === 0 && <p>Nenhum veículo encontrado</p>}
-        {data && data.length > 0 && (
+        {vehicles && vehicles.length === 0 && <p>Nenhum veículo encontrado</p>}
+        {vehicles && vehicles.length > 0 && (
           <>
             <h2 className={styles.section_title}>Favoritos</h2>
-            {data.filter(vehicle => vehicle.is_favorite).length === 0 ? (
+            {vehicles.filter(vehicle => vehicle.is_favorite).length === 0 ? (
               <p>Nenhum veículo como favorito</p>
             ) : (
               <section className={styles.cards_wrapper}>
-                {data.map(
+                {vehicles.map(
                   vehicle =>
                     vehicle.is_favorite && (
                       <Card
@@ -100,11 +96,11 @@ const HomeVehicles = () => {
               </section>
             )}
             <h2 className={styles.section_title}>Meus anúncios</h2>
-            {data.filter(vehicle => !vehicle.is_favorite).length === 0 ? (
+            {vehicles.filter(vehicle => !vehicle.is_favorite).length === 0 ? (
               <p>Nenhum veículo encontrado</p>
             ) : (
               <section className={styles.cards_wrapper}>
-                {data.map(
+                {vehicles.map(
                   vehicle =>
                     !vehicle.is_favorite && (
                       <Card

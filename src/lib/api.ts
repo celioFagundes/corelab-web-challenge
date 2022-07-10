@@ -1,5 +1,7 @@
 import axios from 'axios'
-import { IVehicleCreate } from '../types/Vehicle'
+import useSWR from 'swr'
+import { IGetParams } from '../types/GetParams'
+import { IVehicle, IVehicleCreate } from '../types/Vehicle'
 
 const API = 'http://localhost:3333'
 const endpoint = (path: string): string => API + path
@@ -19,8 +21,19 @@ const remove = async (path: string): Promise<any> => {
 const postTrigger = async (path: string): Promise<any> => {
   return axios.post(endpoint(path))
 }
-export const getVehicles = async (path: string) => {
-  return get(path)
+export const GetVehicles = (params: IGetParams) => {
+  const { data, error, mutate } = useSWR<IVehicle[]>(
+    endpoint(
+      `/vehicles/?keyword=${params.keyword}&color=${params.color}&brand=${params.brand}&year=${params.year}&minValue=${params.minValue}&maxValue=${params.maxValue}`
+    ),
+    get
+  )
+  return {
+    vehicles: data,
+    isLoading: !error && !data,
+    isError: error,
+    update: mutate,
+  }
 }
 export const createVehicle = async (values: IVehicleCreate) => {
   return post('/vehicles', values)
