@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import useSWR from 'swr'
 import { useFormik } from 'formik'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import * as Yup from 'yup'
@@ -7,7 +6,7 @@ import { BiArrowBack } from 'react-icons/bi'
 import { IVehicle } from '../../../types/Vehicle'
 import styles from './styles.module.scss'
 import { colorOptions, brandOptions } from '../../../utils/options'
-import { editVehicle, getVehicleById } from '../../../lib/api'
+import { editVehicle, GetVehicleById } from '../../../lib/api'
 
 import { Input } from '../../../components/Inputs'
 import { Select } from '../../../components/Selects'
@@ -41,12 +40,9 @@ const VehicleSchema = Yup.object().shape({
     .required('Por favor, informe a placa do veículo'),
 })
 function EditVehicle() {
-  const params = useParams()
+  const { id } = useParams()
   const navigate = useNavigate()
-  const { data } = useSWR<IVehicle>(
-    params.id ? `http://localhost:3333/vehicles/${params.id}` : null,
-    getVehicleById,
-  )
+  const { vehicle } = GetVehicleById(id)
   const form = useFormik({
     validateOnChange: false,
     validateOnMount: false,
@@ -62,28 +58,28 @@ function EditVehicle() {
     },
     validationSchema: VehicleSchema,
     onSubmit: async values => {
-      const updateData: IVehicle = await editVehicle(Number(params.id), values)
-      if (updateData) {
+      const updateVehicle: IVehicle = await editVehicle(Number(id), values)
+      if (updateVehicle) {
         navigate('/')
       }
     },
   })
   useEffect(() => {
     const fillFormFields = () => {
-      if (!data) {
+      if (!vehicle) {
         return null
       }
-      form.setFieldValue('name', data.name)
-      form.setFieldValue('brand', data.brand)
-      form.setFieldValue('description', data.description)
-      form.setFieldValue('color', data.color)
-      form.setFieldValue('year', data.year)
-      form.setFieldValue('plate', data.plate)
-      form.setFieldValue('price', data.price)
+      form.setFieldValue('name', vehicle.name)
+      form.setFieldValue('brand', vehicle.brand)
+      form.setFieldValue('description', vehicle.description)
+      form.setFieldValue('color', vehicle.color)
+      form.setFieldValue('year', vehicle.year)
+      form.setFieldValue('plate', vehicle.plate)
+      form.setFieldValue('price', vehicle.price)
       return null
     }
     fillFormFields()
-  }, [data])
+  }, [vehicle])
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>

@@ -35,6 +35,17 @@ export const GetVehicles = (params: IGetParams) => {
     update: mutate,
   }
 }
+export const GetVehicleById = (id?: string) => {
+  const { data, error } = useSWR<IVehicle>(
+    id ? endpoint(`/vehicles/${id}`) : null,
+    get,
+  )
+  return {
+    vehicle: data,
+    isLoading: !error && !data,
+    isError: error,
+  }
+}
 export const createVehicle = async (values: IVehicleCreate) => {
   return post('/vehicles', values)
 }
