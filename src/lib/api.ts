@@ -3,7 +3,7 @@ import useSWR from 'swr'
 import { IGetParams } from '../types/GetParams'
 import { IVehicle, IVehicleCreate } from '../types/Vehicle'
 
-const API = 'http://localhost:3333'
+const API = 'https://corelab-api.herokuapp.com'
 const endpoint = (path: string): string => API + path
 
 const get = async (path: string): Promise<any> => {
